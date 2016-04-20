@@ -18,6 +18,7 @@
 		43E81E341CC545540018B9AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43E81E321CC545540018B9AE /* Main.storyboard */; };
 		43E81E361CC545540018B9AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43E81E351CC545540018B9AE /* Assets.xcassets */; };
 		43E81E391CC545540018B9AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43E81E371CC545540018B9AE /* LaunchScreen.storyboard */; };
+		43F616431CC7DA680003DF87 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F616421CC7DA680003DF87 /* Bird.swift */; };
 		BAC7FAEF0B7DA2F6BA69D6EA /* Pods_Flappy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA60BC6ADE052ED4F8461E5 /* Pods_Flappy.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		43E81E351CC545540018B9AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43E81E381CC545540018B9AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43E81E3A1CC545540018B9AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43F616421CC7DA680003DF87 /* Bird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		4EA60BC6ADE052ED4F8461E5 /* Pods_Flappy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flappy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C541F781281544F312E52B9E /* Pods-Flappy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flappy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flappy/Pods-Flappy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,18 +75,19 @@
 		43E81E291CC545540018B9AE /* Flappy */ = {
 			isa = PBXGroup;
 			children = (
-				43E81E2A1CC545540018B9AE /* AppDelegate.swift */,
-				43885B6B1CC5A7020057651C /* MenuViewController.swift */,
-				43E81E2C1CC545540018B9AE /* GameScene.sks */,
-				43E81E2E1CC545540018B9AE /* GameScene.swift */,
-				43E81E301CC545540018B9AE /* GameViewController.swift */,
+				43E81E371CC545540018B9AE /* LaunchScreen.storyboard */,
 				43E81E321CC545540018B9AE /* Main.storyboard */,
 				43E81E351CC545540018B9AE /* Assets.xcassets */,
-				43E81E371CC545540018B9AE /* LaunchScreen.storyboard */,
 				43E81E3A1CC545540018B9AE /* Info.plist */,
+				43E81E2C1CC545540018B9AE /* GameScene.sks */,
+				43E81E2A1CC545540018B9AE /* AppDelegate.swift */,
+				43885B6B1CC5A7020057651C /* MenuViewController.swift */,
+				43E81E2E1CC545540018B9AE /* GameScene.swift */,
+				43E81E301CC545540018B9AE /* GameViewController.swift */,
 				43087D761CC6783400FB7BA3 /* Startable.swift */,
 				43087D781CC678E000FB7BA3 /* Background.swift */,
 				43087D7A1CC67FC500FB7BA3 /* ParallaxNode.swift */,
+				43F616421CC7DA680003DF87 /* Bird.swift */,
 			);
 			path = Flappy;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				43E81E311CC545540018B9AE /* GameViewController.swift in Sources */,
 				43E81E2B1CC545540018B9AE /* AppDelegate.swift in Sources */,
 				43885B6C1CC5A7020057651C /* MenuViewController.swift in Sources */,
+				43F616431CC7DA680003DF87 /* Bird.swift in Sources */,
 				43087D791CC678E000FB7BA3 /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
