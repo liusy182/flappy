@@ -60,9 +60,11 @@ private extension Bird {
     func createNode() -> SKSpriteNode {
         let birdNode = SKSpriteNode(imageNamed: textureNames.first!)
         birdNode.zPosition = 2.0
-        birdNode.physicsBody = SKPhysicsBody.rectSize(birdNode.size) {
-            $0.dynamic = true
-        }
+        
+        let physicsBody = SKPhysicsBody(rectangleOfSize: birdNode.size)
+        physicsBody.dynamic = true
+        birdNode.physicsBody = physicsBody
+        
         return birdNode
     }
     

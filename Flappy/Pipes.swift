@@ -41,6 +41,7 @@ extension Pipes : Startable {
     }
     
     func stop() {
+        print ("pipes stop")
         parentNode.removeActionForKey(Pipes.createActionKey)
         
         let pipeNodes = parentNode.children.filter {
