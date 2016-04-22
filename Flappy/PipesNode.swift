@@ -29,11 +29,17 @@ class PipesNode {
         pipeBottom.position = pipeBottomPosition
         pipesNode.addChild(pipeBottom)
         
+        let gapNode = PipesNode.createGap(size: CGSize(
+            width: pipeBottom.size.width,
+            height: gapSize*2))
+        gapNode.position = CGPoint(x: 0, y: centerY)
+        pipesNode.addChild(gapNode)
+        
         finalOffset = -pipeBottom.size.width
         startingOffset = -finalOffset
     }
     
-    class func createPipe(imageNamed: String) -> SKSpriteNode {
+    private class func createPipe(imageNamed: String) -> SKSpriteNode {
         let pipeNode = SKSpriteNode(imageNamed: imageNamed)
         
         let size = CGSize(width: pipeNode.size.width, height: pipeNode.size.height)
@@ -45,6 +51,22 @@ class PipesNode {
         pipeNode.physicsBody = physicsBody
         
         return pipeNode
+    }
+    
+    private class func createGap(size size: CGSize)-> SKSpriteNode {
+        let gapNode = SKSpriteNode(
+            color: UIColor.clearColor(),
+            size: size)
+        gapNode.zPosition = 6
+        
+        let physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        physicsBody.dynamic = false
+        physicsBody.affectedByGravity = false
+        physicsBody.categoryBitMask = BodyType.gap.rawValue
+        physicsBody.collisionBitMask = BodyType.gap.rawValue
+        gapNode.physicsBody = physicsBody
+        
+        return gapNode
     }
     
     func addTo(parentNode: SKSpriteNode) -> PipesNode {

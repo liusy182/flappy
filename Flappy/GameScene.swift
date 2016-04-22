@@ -63,6 +63,10 @@ class GameScene: SKScene {
         let city = Background(textureNamed: "city", duration:20.0).addTo(screenNode, zPosition: 1)
         let ground = Background(textureNamed: "ground", duration:5.0).addTo(screenNode, zPosition: 5)
         
+        //let ground = Background(textureNamed: "ground", duration:5.0)
+        ground.zPosition(5)
+        screenNode.addChild(bodyTextureName("ground"))
+        
         bird = Bird(textureNames: ["bird1.png", "bird2.png"]).addTo(screenNode)
         bird.position = CGPointMake(30.0, size.height / 2)
         
@@ -75,6 +79,7 @@ class GameScene: SKScene {
         }
     }
     
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         bird.flap()
@@ -84,3 +89,54 @@ class GameScene: SKScene {
         bird.update()
     }
 }
+
+// Contacts
+extension GameScene: SKPhysicsContactDelegate {
+    func didBeginContact(contact: SKPhysicsContact) {
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        switch (contactMask) {
+        case BodyType.pipe.rawValue | BodyType.bird.rawValue:
+            print("Contact with a pipe")
+        case BodyType.ground.rawValue | BodyType.bird.rawValue:
+            print("Contact with ground")
+            for actor in actors {
+                actor.stop()
+            }
+        default:
+            return
+        }
+        
+    }
+    
+    func didEndContact(contact: SKPhysicsContact) {
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        switch (contactMask) {
+        case BodyType.gap.rawValue | BodyType.bird.rawValue:
+            print("Contact with gap")
+        default:
+            return
+        }
+    }
+}
+
+private extension GameScene{
+    func bodyTextureName(textureName: String) -> SKNode{
+        let image = UIImage(named: textureName)
+        let width = image!.size.width
+        let height = image!.size.height
+        let groundBody = SKNode()
+        groundBody.position = CGPoint(x: width/2, y: height/2)
+        
+        let body = SKPhysicsBody(rectangleOfSize: image!.size)
+        body.dynamic = false
+        body.affectedByGravity = false
+        body.categoryBitMask = BodyType.ground.rawValue
+        body.collisionBitMask = BodyType.ground.rawValue
+        groundBody.physicsBody = body
+        
+        return groundBody
+    }
+}
+

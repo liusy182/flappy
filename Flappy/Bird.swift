@@ -61,10 +61,23 @@ private extension Bird {
         let birdNode = SKSpriteNode(imageNamed: textureNames.first!)
         birdNode.zPosition = 2.0
         
-        let physicsBody = SKPhysicsBody(rectangleOfSize: birdNode.size)
-        physicsBody.dynamic = true
-        birdNode.physicsBody = physicsBody
+        let birdSize = CGSize(
+            width: birdNode.size.width * 0.8,
+            height: birdNode.size.height * 0.8)
         
+        let physicsBody = SKPhysicsBody(rectangleOfSize: birdSize)
+        physicsBody.dynamic = true
+        physicsBody.dynamic = true
+        physicsBody.categoryBitMask = BodyType.bird.rawValue
+        
+        physicsBody.collisionBitMask = BodyType.bird.rawValue
+        
+        physicsBody.contactTestBitMask =
+            BodyType.ground.rawValue |
+            BodyType.pipe.rawValue |
+            BodyType.gap.rawValue
+        
+        birdNode.physicsBody = physicsBody
         return birdNode
     }
     
