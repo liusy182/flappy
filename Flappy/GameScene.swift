@@ -8,6 +8,14 @@
 
 import SpriteKit
 
+enum BodyType : UInt32 {
+    case bird = 0b0001
+    case ground = 0b0010
+    case pipe = 0b0100
+    // need to detect that bird pass the hole so that to increase the score
+    case gap = 0b1000
+}
+
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks") {

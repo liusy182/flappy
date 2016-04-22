@@ -35,6 +35,15 @@ class PipesNode {
     
     class func createPipe(imageNamed: String) -> SKSpriteNode {
         let pipeNode = SKSpriteNode(imageNamed: imageNamed)
+        
+        let size = CGSize(width: pipeNode.size.width, height: pipeNode.size.height)
+        let physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        physicsBody.dynamic = false
+        physicsBody.affectedByGravity = false
+        physicsBody.categoryBitMask = BodyType.pipe.rawValue
+        physicsBody.collisionBitMask = BodyType.pipe.rawValue
+        pipeNode.physicsBody = physicsBody
+        
         return pipeNode
     }
     
