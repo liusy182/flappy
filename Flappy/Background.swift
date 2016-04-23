@@ -21,10 +21,6 @@ class Background {
         parallaxNode.addTo(parentNode, zPosition: zPosition)
         return self
     }
-    
-    func zPosition(pos: CGFloat) {
-        parallaxNode.zPosition(pos)
-    }
 }
 
 // Startable

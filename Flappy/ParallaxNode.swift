@@ -17,19 +17,15 @@ class ParallaxNode {
         let rightHalf = ParallaxNode.createHalfNodeTexture(
             textureNamed, offsetX: leftHalf.size.width)
         
-        let size = CGSize(width: leftHalf.size.width + rightHalf.size.width,
-                          height: leftHalf.size.height)
+        let size = CGSize(
+            width: leftHalf.size.width + rightHalf.size.width,
+            height: leftHalf.size.height)
         
         node = SKSpriteNode(color: UIColor.clearColor(), size: size)
         node.anchorPoint = CGPointZero
         node.position = CGPointZero
         node.addChild(leftHalf)
         node.addChild(rightHalf)
-    }
-    
-    func zPosition(zPosition: CGFloat) -> ParallaxNode {
-        node.zPosition = zPosition
-        return self
     }
     
     func addTo(parentNode: SKSpriteNode, zPosition: CGFloat) -> ParallaxNode {
