@@ -53,8 +53,8 @@ class GameScene: SKScene {
     private var bird: Bird!
     private var score = Score()
     
-    private var onPlayAgainPressed:(()->Void)!
-    private var onCancelPressed:(()->Void)!
+    var onPlayAgainPressed:(()->Void)!
+    var onCancelPressed:(()->Void)!
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
