@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import SIAlertView
 
 enum BodyType : UInt32 {
     case bird = 0b0001
@@ -50,6 +51,10 @@ class GameScene: SKScene {
     private var screenNode: SKSpriteNode!
     private var actors: [Startable]!
     private var bird: Bird!
+    private var score = Score()
+    
+    private var onPlayAgainPressed:(()->Void)!
+    private var onCancelPressed:(()->Void)!
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -62,6 +67,8 @@ class GameScene: SKScene {
         
         screenNode.anchorPoint = CGPoint(x: 0, y: 0)
         addChild(screenNode)
+        
+        score.addTo(screenNode)
         
         let sky = Background(textureNamed: "sky", duration:60.0).addTo(screenNode, zPosition: 0)
         let city = Background(textureNamed: "city", duration:20.0).addTo(screenNode, zPosition: 1)
@@ -98,11 +105,13 @@ extension GameScene: SKPhysicsContactDelegate {
         switch (contactMask) {
         case BodyType.pipe.rawValue | BodyType.bird.rawValue:
             print("Contact with a pipe")
+            bird.pushDown()
         case BodyType.ground.rawValue | BodyType.bird.rawValue:
             print("Contact with ground")
             for actor in actors {
                 actor.stop()
             }
+            askToPlayAgain()
         default:
             print("unknown contact")
             return
@@ -116,6 +125,7 @@ extension GameScene: SKPhysicsContactDelegate {
         switch (contactMask) {
         case BodyType.gap.rawValue | BodyType.bird.rawValue:
             print("Contact with gap")
+            score.increase()
         default:
             return
         }
@@ -139,6 +149,14 @@ private extension GameScene{
         groundBody.physicsBody = body
         
         return groundBody
+    }
+    
+    func askToPlayAgain() {
+        let alertView = SIAlertView(title: "Ouch!!", andMessage: "Congratulations! Your score is \(score.currentScore). Play again?")
+        
+        alertView.addButtonWithTitle("OK", type: .Default) { _ in self.onPlayAgainPressed() }
+        alertView.addButtonWithTitle("Cancel", type: .Default) { _ in self.onCancelPressed() }
+        alertView.show()
     }
 }
 
