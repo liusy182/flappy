@@ -17,6 +17,15 @@ enum BodyType : UInt32 {
     case gap = 0b1000
 }
 
+func execAfter(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
+}
+
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks") {
@@ -33,18 +42,31 @@ extension SKNode {
     }
 }
 
-//extension SKPhysicsBody {
-//    typealias BodyBuilderClosure = (SKPhysicsBody) -> ()
-//    
-//    class func rectSize(
-//        size: CGSize,
-//        builderClosure: BodyBuilderClosure) -> SKPhysicsBody {
-//        
-//        let body = SKPhysicsBody(rectangleOfSize: size)
-//        builderClosure(body)
-//        return body
-//    }
-//}
+extension SKAction {
+    // Thanks to Benzi: http://stackoverflow.com/a/24769521/288379
+    class func shake(
+        duration:CGFloat,
+        amplitudeX:Int = 3,
+        amplitudeY:Int = 3) -> SKAction {
+        
+        let numberOfShakes = Int(duration / 0.015 / 2.0)
+        var actionsArray:[SKAction] = []
+        for _ in 0..<numberOfShakes {
+            let dx =
+                CGFloat(arc4random_uniform(UInt32(amplitudeX))) - CGFloat(amplitudeX / 2)
+            
+            let dy =
+                CGFloat(arc4random_uniform(UInt32(amplitudeY))) - CGFloat(amplitudeY / 2)
+            
+            let forward = SKAction.moveByX(dx, y:dy, duration: 0.015)
+            
+            let reverse = forward.reversedAction()
+            actionsArray.append(forward)
+            actionsArray.append(reverse)
+        }
+        return SKAction.sequence(actionsArray)
+    }
+}
 
 
 class GameScene: SKScene {
@@ -89,6 +111,7 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
+        runAction(SKAction.playSoundFileNamed("flap.wav", waitForCompletion: false))
         bird.flap()
     }
     
@@ -105,13 +128,19 @@ extension GameScene: SKPhysicsContactDelegate {
         switch (contactMask) {
         case BodyType.pipe.rawValue | BodyType.bird.rawValue:
             print("Contact with a pipe")
+            runAction(SKAction.playSoundFileNamed("punch.wav", waitForCompletion: false))
             bird.pushDown()
         case BodyType.ground.rawValue | BodyType.bird.rawValue:
             print("Contact with ground")
+            runAction(SKAction.playSoundFileNamed("punch.wav", waitForCompletion: false))
             for actor in actors {
                 actor.stop()
             }
-            askToPlayAgain()
+            let shakeAction = SKAction.shake(0.5, amplitudeX: 20, amplitudeY: 20)
+            screenNode.runAction(shakeAction)
+            execAfter(1) {
+                self.askToPlayAgain()
+            }
         default:
             print("unknown contact")
             return
@@ -125,6 +154,7 @@ extension GameScene: SKPhysicsContactDelegate {
         switch (contactMask) {
         case BodyType.gap.rawValue | BodyType.bird.rawValue:
             print("Contact with gap")
+            runAction(SKAction.playSoundFileNamed("yeah.mp3", waitForCompletion: false))
             score.increase()
         default:
             return

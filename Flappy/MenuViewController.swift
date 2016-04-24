@@ -11,6 +11,8 @@ import HTPressableButton
 import Cartography
 
 class MenuViewController: UIViewController {
+    private var player: MusicPlayer?
+    
     private let playButton = HTPressableButton(
         frame: CGRectMake(0, 0, 260, 50), buttonStyle: .Rect)
     
@@ -19,6 +21,9 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        player = try? MusicPlayer(filename: "Pamgaea", type: "mp3")
+        player?.play()
+        
         setup()
         layoutView()
         style()

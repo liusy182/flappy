@@ -22,6 +22,11 @@
 		43E81E361CC545540018B9AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43E81E351CC545540018B9AE /* Assets.xcassets */; };
 		43E81E391CC545540018B9AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43E81E371CC545540018B9AE /* LaunchScreen.storyboard */; };
 		43F616431CC7DA680003DF87 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F616421CC7DA680003DF87 /* Bird.swift */; };
+		43FD5C6B1CCC561A000B6373 /* flap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 43FD5C671CCC561A000B6373 /* flap.wav */; };
+		43FD5C6C1CCC561A000B6373 /* Pamgaea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 43FD5C681CCC561A000B6373 /* Pamgaea.mp3 */; };
+		43FD5C6D1CCC561A000B6373 /* punch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 43FD5C691CCC561A000B6373 /* punch.wav */; };
+		43FD5C6E1CCC561A000B6373 /* yeah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 43FD5C6A1CCC561A000B6373 /* yeah.mp3 */; };
+		43FD5C701CCC5AF5000B6373 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FD5C6F1CCC5AF5000B6373 /* MusicPlayer.swift */; };
 		BAC7FAEF0B7DA2F6BA69D6EA /* Pods_Flappy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA60BC6ADE052ED4F8461E5 /* Pods_Flappy.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +49,11 @@
 		43E81E381CC545540018B9AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43E81E3A1CC545540018B9AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43F616421CC7DA680003DF87 /* Bird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
+		43FD5C671CCC561A000B6373 /* flap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = flap.wav; path = ../../../Downloads/sounds/flap.wav; sourceTree = "<group>"; };
+		43FD5C681CCC561A000B6373 /* Pamgaea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Pamgaea.mp3; path = ../../../Downloads/sounds/Pamgaea.mp3; sourceTree = "<group>"; };
+		43FD5C691CCC561A000B6373 /* punch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = punch.wav; path = ../../../Downloads/sounds/punch.wav; sourceTree = "<group>"; };
+		43FD5C6A1CCC561A000B6373 /* yeah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = yeah.mp3; path = ../../../Downloads/sounds/yeah.mp3; sourceTree = "<group>"; };
+		43FD5C6F1CCC5AF5000B6373 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		4EA60BC6ADE052ED4F8461E5 /* Pods_Flappy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flappy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C541F781281544F312E52B9E /* Pods-Flappy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flappy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flappy/Pods-Flappy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				43E81E291CC545540018B9AE /* Flappy */,
+				43FD5C651CCC55EE000B6373 /* Supporting Files */,
 				43E81E281CC545540018B9AE /* Products */,
 				E0612A252FEFC465E7509F5D /* Pods */,
 				4F70AAF8377122C872232522 /* Frameworks */,
@@ -97,8 +108,28 @@
 				435305201CC90C0100786C4E /* PipesNode.swift */,
 				435305221CC90C2000786C4E /* Pipes.swift */,
 				435D22F01CCB7540009531B2 /* Score.swift */,
+				43FD5C6F1CCC5AF5000B6373 /* MusicPlayer.swift */,
 			);
 			path = Flappy;
+			sourceTree = "<group>";
+		};
+		43FD5C651CCC55EE000B6373 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43FD5C661CCC55FE000B6373 /* sounds */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43FD5C661CCC55FE000B6373 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				43FD5C671CCC561A000B6373 /* flap.wav */,
+				43FD5C681CCC561A000B6373 /* Pamgaea.mp3 */,
+				43FD5C691CCC561A000B6373 /* punch.wav */,
+				43FD5C6A1CCC561A000B6373 /* yeah.mp3 */,
+			);
+			name = sounds;
 			sourceTree = "<group>";
 		};
 		4F70AAF8377122C872232522 /* Frameworks */ = {
@@ -180,10 +211,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43FD5C6B1CCC561A000B6373 /* flap.wav in Resources */,
 				43E81E2D1CC545540018B9AE /* GameScene.sks in Resources */,
 				43E81E391CC545540018B9AE /* LaunchScreen.storyboard in Resources */,
 				43E81E361CC545540018B9AE /* Assets.xcassets in Resources */,
 				43E81E341CC545540018B9AE /* Main.storyboard in Resources */,
+				43FD5C6E1CCC561A000B6373 /* yeah.mp3 in Resources */,
+				43FD5C6D1CCC561A000B6373 /* punch.wav in Resources */,
+				43FD5C6C1CCC561A000B6373 /* Pamgaea.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +279,7 @@
 			files = (
 				43087D7B1CC67FC500FB7BA3 /* ParallaxNode.swift in Sources */,
 				435305231CC90C2000786C4E /* Pipes.swift in Sources */,
+				43FD5C701CCC5AF5000B6373 /* MusicPlayer.swift in Sources */,
 				43087D771CC6783400FB7BA3 /* Startable.swift in Sources */,
 				43E81E2F1CC545540018B9AE /* GameScene.swift in Sources */,
 				435305211CC90C0100786C4E /* PipesNode.swift in Sources */,
